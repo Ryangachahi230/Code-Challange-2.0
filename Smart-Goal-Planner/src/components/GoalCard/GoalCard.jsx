@@ -17,7 +17,7 @@ function GoalCard({ goal, onEdit, onDelete }) {
       <p>Remaining: ${remaining}</p>
       <p>Deadline: {goal.deadline}</p>
       <p>{isOverdue ? "Overdue!" : `Days Left: ${daysLeft}`}</p>
-      {isComplete && <p>✅ Completed!</p>}
+      {isComplete && <p> Completed!</p>}
       <div style={{ background: "#eee", height: "10px", marginTop: "5px" }}>
         <div style={{ background: "blue", height: "10px", width: `${progress}%` }} />
       </div>

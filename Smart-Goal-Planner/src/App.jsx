@@ -3,12 +3,12 @@ import AddGoalForm from "./components/AddGoalForm/AddGoalForm.jsx";
 import DepositForm from "./components/DepositForm/DepositForm.jsx";
 import GoalList from "./components/GoalList/GoalList.jsx";
 import OverviewPanel from "./components/OverViewPanel/OverViewPanel.jsx";
-import { fetchGoals, createGoal, updateGoal, deleteGoal } from "./Services/Api.js";
+
 import "./App.css";
 
 function App() {
   const [goals, setGoals] = useState([]);
-  const [editGoal, setEditGoal] = useState(null);
+  const [editGoal, setEditGoal] = useState(0);
 
   // Load goals on first render
   useEffect(() => {
@@ -43,6 +43,20 @@ function App() {
       console.error("Error saving goal:", error);
     }
   };
+  const fetchGoals = async () => {
+    fetch("http://localhost:3000/goals")
+      .then((response) => response.json())
+      then((data) => {
+        return data.map((goal) => ({
+          ...goal,
+          createdAt: new Date(goal.createdAt).toISOString().split("T")[0],
+        }));
+      })
+      .catch((error) => {
+        console.error("Error fetching goals:", error);
+        return [];
+      });
+  }
 
   const handleDeposit = async (goalId, amount) => {
     try {
